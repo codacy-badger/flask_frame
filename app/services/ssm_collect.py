@@ -7,7 +7,6 @@ from botocore.exceptions import ClientError, ParamValidationError
 PROFILE_NAME = 'dev'
 REGION_NAME = 'eu-west-1'
 
-
 class SsmCollect(object):
 
     def __init__(self):
@@ -35,7 +34,7 @@ class SsmCollect(object):
             'Name': parameter['Parameter']['Name'],
             'Value': parameter['Parameter']['Value'],
             'Version': parameter['Parameter']['Version'],
-            'Modified': parameter['Parameter']['LastModifiedDate'],
+            'Modified': parameter['Parameter']['LastModifiedDate'].strftime('%Y-%m-%d'),
             'Arn': parameter['Parameter']['ARN'],
             }
         except ParamValidationError as _e:
@@ -57,6 +56,8 @@ class SsmCollect(object):
         params = []
         param_name = []
         param_value = dict()
+
+        logger.log('P001-' + res_type)
 
         for response in paginator.paginate():
             params.append(response['Parameters'])

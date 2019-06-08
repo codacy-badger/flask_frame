@@ -8,14 +8,15 @@ class apiCall():
     def __init__(self):
         pass
 
-    def get(self, route_url):
+    def get(self, route_url, params = {}):
         url = api_url + route_url
-
-        return requests.get(url).json()
-
-    def get_by_id(self, route_url, params = {}):
-        url = api_url + route_url
+        logger.log(url)
         return requests.get(url, params=params).json()
+
+    def get_id(self, route_url, id, params = {}):
+        url = api_url + route_url + id
+        logger.log(requests.get(url, params=params).json())
+        return [requests.get(url, params=params).json()]
 
 """
     def post(self, route_url, params = {}):

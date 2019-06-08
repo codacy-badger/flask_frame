@@ -5,12 +5,28 @@
 
 {% block container %}
 
+    <div class="text-center mx-auto mb-3">
+        <form action="{{ url_for('tutorial.requesting') }}" method="get" class="d-flex">
+            <input name="query_api" class="form-control form-control-sm" value="{{ query_api }}"
+                   placeholder="Search for content"/>
+            <button type="submit" class="btn btn-primary btn-sm ml-1">Search</button>
+        </form>
+    </div>
+
+    {% if tutorial2 != False %}
+        <div class="border rounded p-5 mb-5">
+            {% for item in tutorial2 %}
+                {{ render_repo(item, loop) }}
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <div class="border rounded p-5 mb-5">
         {% for item in tutorial1 %}
             {{ render_repo(item, loop) }}
         {% endfor %}
     </div>
+
 
     <div class="text-center mx-auto mb-3">
         <form action="{{ url_for('tutorial.requesting') }}" method="get" class="d-flex">
@@ -23,7 +39,7 @@
 
     <div class="border rounded p-5 mb-5">
         {% for k,v in tutorial3.items() %}
-                {{ render_ssm(k,v, loop) }}
+            {{ render_ssm(k,v, loop) }}
         {% endfor %}
     </div>
 
