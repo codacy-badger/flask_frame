@@ -1,0 +1,34 @@
+{% extends "tutorial/base.html" %}
+{% from "tutorial/repo.html" import render_repo with context %}
+{% from "tutorial/ssm.html" import render_ssm with context %}
+
+
+{% block container %}
+
+
+    <div class="border rounded p-5 mb-5">
+        {% for item in tutorial1 %}
+            {{ render_repo(item, loop) }}
+        {% endfor %}
+    </div>
+
+    <div class="text-center mx-auto mb-3">
+        <form action="{{ url_for('tutorial.requesting') }}" method="get" class="d-flex">
+            <input name="query" class="form-control form-control-sm" value="{{ query }}"
+                   placeholder="Search for content"/>
+            <button type="submit" class="btn btn-primary btn-sm ml-1">Search</button>
+        </form>
+    </div>
+
+
+    <div class="border rounded p-5 mb-5">
+        {% for k,v in tutorial3.items() %}
+                {{ render_ssm(k,v, loop) }}
+        {% endfor %}
+    </div>
+
+
+    </div>
+
+
+{% endblock %}

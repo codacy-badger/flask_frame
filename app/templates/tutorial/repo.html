@@ -1,0 +1,13 @@
+{% macro render_repo(item, loop) %}
+  <div class="border-bottom {{ 'border-top' if loop.first }}">
+    <div class="d-flex flex-column m-3">
+
+      <small class="text-gray">{{ item["id"] }}</small>
+      <div class="mt-2">
+        <small class="text-gray mr-3">{{ item["text"] }} </small>
+        <small class="text-gray mr-3">{{ item["createdAt"] }}</small>
+        <small class="text-gray mr-3">{{ item["updatedAt"] }}</small>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
