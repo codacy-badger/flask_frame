@@ -3,7 +3,7 @@ from flask import redirect, render_template, request
 from flask import g, Blueprint, flash, url_for, session
 from app import logger
 
-from app.services.apiCall import apiCall
+from app.services.api_call import ApiCall
 from app.services.ssm_collect import SsmCollect
 
 blueprint = Blueprint('tutorial', __name__, url_prefix='/tutorial')
@@ -14,7 +14,7 @@ def requesting():
     search = request.args.get('query', '')
     search_api = request.args.get('query_api', '')
 
-    apicall = apiCall()
+    apicall = ApiCall()
     results1 = apicall.get('/todos')
 
     if len(search_api) != 0:

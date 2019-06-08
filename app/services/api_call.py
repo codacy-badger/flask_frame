@@ -3,7 +3,7 @@ from app import logger
 api_url = 'https://px84fa2qwe.execute-api.eu-west-1.amazonaws.com/dev'
 
 
-class apiCall():
+class ApiCall():
 
     def __init__(self):
         pass

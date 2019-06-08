@@ -1,7 +1,6 @@
 {% macro render_repo(item, loop) %}
   <div class="border-bottom {{ 'border-top' if loop.first }}">
     <div class="d-flex flex-column m-3">
-
         <p class="text-black"><span class="badge badge-pill badge-light">{{ item["id"] }}</span></p>
       <div class="mt-2">
         <small class="text-gray mr-3">{{ item["text"] }} </small>
