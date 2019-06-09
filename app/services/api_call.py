@@ -10,12 +10,16 @@ class ApiCall():
 
     def get(self, route_url, params = {}):
         url = API_URL + route_url
-        logger.info(url)
+        logger.debug('PU001 - URL to collect all item' + url)
         return requests.get(url, params=params).json()
 
     def get_id(self, route_url, id, params = {}):
+
         url = API_URL + route_url + id
+
+        logger.debug('PU002 - URL to collect item per ID' + url)
         logger.info(requests.get(url, params=params).json())
+
         return [requests.get(url, params=params).json()]
 
 """
