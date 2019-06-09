@@ -1,7 +1,6 @@
 {
-  "name": "MLH Hackathon Flask Starter",
-  "description": "A hackathon starting point for new Flask applications",
-  "repository": "https://github.com/MLH/mlh-hackathon-flask-starter.git",
-  "logo": "https://avatars1.githubusercontent.com/u/5752708?s=100",
+  "name": "Flask starter",
+  "description": "Basic flash frame using REST, and server side logic.",
+  "repository": "https://github.com/netlounge/flask_frame.git",
   "keywords": ["python", "flask"]
 }

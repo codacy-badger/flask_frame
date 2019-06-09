@@ -1,5 +1,8 @@
-"""Extensions module - Set up for additional libraries can go in here."""
+"""The logging module."""
+
 import logging
+
+# TODO make this professional
 
 
 def info(message: object) -> str:
