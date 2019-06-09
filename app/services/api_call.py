@@ -1,6 +1,6 @@
-import requests, json
+import requests
+from app.settings import API_URL
 from app import logger
-api_url = 'https://px84fa2qwe.execute-api.eu-west-1.amazonaws.com/dev'
 
 
 class ApiCall():
@@ -9,13 +9,13 @@ class ApiCall():
         pass
 
     def get(self, route_url, params = {}):
-        url = api_url + route_url
-        logger.log(url)
+        url = API_URL + route_url
+        logger.info(url)
         return requests.get(url, params=params).json()
 
     def get_id(self, route_url, id, params = {}):
-        url = api_url + route_url + id
-        logger.log(requests.get(url, params=params).json())
+        url = API_URL + route_url + id
+        logger.info(requests.get(url, params=params).json())
         return [requests.get(url, params=params).json()]
 
 """

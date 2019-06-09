@@ -26,7 +26,7 @@ def requesting():
     results3 = ssm_collect.get_parameters(search)
 
     #logger.log(results1)
-    logger.log(results2)
+    logger.info(results2)
     #logger.log(results3)
 
     return render_template('tutorial/requesting.html',

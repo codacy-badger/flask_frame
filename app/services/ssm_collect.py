@@ -38,9 +38,9 @@ class SsmCollect(object):
             'Arn': parameter['Parameter']['ARN'],
             }
         except ParamValidationError as _e:
-            logger("Parameter validation error: %s" % _e)
+            logger.error("Parameter validation error: %s" % _e)
         except ClientError as _e:
-            logger("Unexpected error: %s" % _e)
+            logger.error("Unexpected error: %s" % _e)
 
     def get_parameters(self, res_type: object) -> dict:
         """Return the result of the boto3 ssm iterator clients response.
@@ -57,7 +57,7 @@ class SsmCollect(object):
         param_name = []
         param_value = dict()
 
-        logger.log('P001-' + res_type)
+        logger.info('P001-' + res_type)
 
         for response in paginator.paginate():
             params.append(response['Parameters'])
