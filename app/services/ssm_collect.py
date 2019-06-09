@@ -1,22 +1,22 @@
 import datetime
-import json
-import boto3
 from app.settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 from app import logger
 from app.models.config import Config
 from botocore.exceptions import ClientError, ParamValidationError
 
 
-def _session():
+def _session() -> object:
     _session = Config(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     return _session.create_client()
+
 
 class SsmCollect(object):
 
     def __init__(self):
         pass
 
-    def _converter(self, _o: object) -> str:
+    @staticmethod
+    def _converter(_o: object) -> None:
         """Return str from datetime.
         :type _o: object
         """
@@ -24,7 +24,8 @@ class SsmCollect(object):
             return _o.__str__()
         return None
 
-    def get_parameter(self, param_name: object) -> object:
+    @staticmethod
+    def get_parameter(param_name: object) -> object:
         """Return the result of the boto3 ssm clients response.
         :type param_name: object
         """
@@ -33,11 +34,11 @@ class SsmCollect(object):
             parameter = ssm_client.get_parameter(
                 Name=param_name, WithDecryption=True)
             return {
-            'Name': parameter['Parameter']['Name'],
-            'Value': parameter['Parameter']['Value'],
-            'Version': parameter['Parameter']['Version'],
-            'Modified': parameter['Parameter']['LastModifiedDate'].strftime('%Y-%m-%d'),
-            'Arn': parameter['Parameter']['ARN'],
+                'Name': parameter['Parameter']['Name'],
+                'Value': parameter['Parameter']['Value'],
+                'Version': parameter['Parameter']['Version'],
+                'Modified': parameter['Parameter']['LastModifiedDate'].strftime('%Y-%m-%d'),
+                'Arn': parameter['Parameter']['ARN'],
             }
         except ParamValidationError as _e:
             logger.error("Parameter validation error: %s" % _e)

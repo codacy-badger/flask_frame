@@ -3,19 +3,25 @@ from app.settings import API_URL
 from app import logger
 
 
-class ApiCall():
+class ApiCall:
 
     def __init__(self):
         pass
 
-    def get(self, route_url, params = {}):
+    @staticmethod
+    def get(route_url, params=None):
+        if params is None:
+            params = {}
         url = API_URL + route_url
         logger.debug('PU001 - URL to collect all item' + url)
         return requests.get(url, params=params).json()
 
-    def get_id(self, route_url, id, params = {}):
+    @staticmethod
+    def get_id(route_url, sid, params=None):
 
-        url = API_URL + route_url + id
+        if params is None:
+            params = {}
+        url = API_URL + route_url + sid
 
         logger.debug('PU002 - URL to collect item per ID' + url)
         logger.info(requests.get(url, params=params).json())

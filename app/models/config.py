@@ -1,11 +1,14 @@
+"""Class to handle boto3 session and client"""
+
 import boto3
 from botocore.exceptions import ClientError
 
 from app import logger
 
-class Config():
 
-    def __init__(self, aws_access_key_id='', aws_secret_access_key=''):
+class Config:
+    
+    def __init__(self, aws_access_key_id: object = '', aws_secret_access_key: object = '') -> object:
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
 

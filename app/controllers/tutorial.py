@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import redirect, render_template, request
-from flask import g, Blueprint, flash, url_for, session
-from app import logger
+from flask import Blueprint
+from flask import render_template, request
 
+from app import logger
 from app.services.api_call import ApiCall
 from app.services.ssm_collect import SsmCollect
 
@@ -25,14 +25,13 @@ def requesting():
     ssm_collect = SsmCollect()
     results3 = ssm_collect.get_parameters(search)
 
-    #logger.log(results1)
+    # logger.log(results1)
     logger.info(results2)
-    #logger.log(results3)
+    # logger.log(results3)
 
     return render_template('tutorial/requesting.html',
-        tutorial1 = results1[:5],
-        tutorial2 = results2,
-        tutorial3=results3,
-        query = search,
-    )
-
+                           tutorial1=results1[:5],
+                           tutorial2=results2,
+                           tutorial3=results3,
+                           query=search,
+                           )

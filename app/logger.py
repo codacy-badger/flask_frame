@@ -11,7 +11,7 @@ def info(message: object) -> str:
     return logging.info(message)
 
 
-def debug(message: object) -> str:
+def debug(message: object) -> object:
     """Return log
     :type message: object
     """
