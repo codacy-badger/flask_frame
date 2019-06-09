@@ -1,24 +1,19 @@
 import boto3
-import configparser
-from botocore.exceptions import ClientError, ParamValidationError
+from botocore.exceptions import ClientError
 
 from app import logger
 
 class Config():
 
-    def __init__(self, profile_name='', region_name=''):
-        self.profile_name = profile_name
-        self.region_name = region_name
+    def __init__(self, aws_access_key_id='', aws_secret_access_key=''):
+        self.aws_access_key_id = aws_access_key_id
+        self.aws_secret_access_key = aws_secret_access_key
 
-    def create_client(self,) -> object:
-        CONFIG = configparser.ConfigParser()
-        CONFIG.read('../../config.ini')
-        PROFILE_NAME = CONFIG['GLOBAL']['PROFILE_NAME']
-        REGION_NAME = CONFIG['GLOBAL']['REGION_NAME']
+    def create_client(self) -> object:
 
         try:
-            session = boto3.session.Session(profile_name=PROFILE_NAME,
-                                            region_name=REGION_NAME)
+            session = boto3.session.Session(self.aws_access_key_id,
+                                            self.aws_secret_access_key)
             ssm_client = session.client('ssm')
             return ssm_client
 
