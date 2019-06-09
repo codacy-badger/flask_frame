@@ -8,12 +8,16 @@ from app import logger
 
 class Config:
     
-    def __init__(self, aws_access_key_id: object = '', aws_secret_access_key: object = '') -> object:
+    def __init__(self, aws_access_key_id: str = '', aws_secret_access_key: str = ''):
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
 
     def create_client(self) -> object:
-
+        """Creats the boto3 session and the client
+        from the given parameters which are stored in
+        the .env config file.
+        :return: ssm_client: object
+        """
         try:
             session = boto3.session.Session(self.aws_access_key_id,
                                             self.aws_secret_access_key)

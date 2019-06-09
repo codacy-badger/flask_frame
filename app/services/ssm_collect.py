@@ -1,3 +1,5 @@
+"""This module is to collect SSM parameters."""
+
 import datetime
 from app.settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 from app import logger
@@ -6,6 +8,8 @@ from botocore.exceptions import ClientError, ParamValidationError
 
 
 def _session() -> object:
+    """Return boto3 client object from Config.
+    """
     _session = Config(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     return _session.create_client()
 
@@ -58,7 +62,7 @@ class SsmCollect(object):
         param_name = []
         param_value = dict()
 
-        logger.info('P001-' + res_type)
+        logger.debug('PUSR01 - Query parameter hit by user' + res_type)
 
         for response in paginator.paginate():
             params.append(response['Parameters'])
