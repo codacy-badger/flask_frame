@@ -1,11 +1,15 @@
 import datetime
 import json
 import boto3
+from app.settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 from app import logger
+from app.models.config import Config
 from botocore.exceptions import ClientError, ParamValidationError
 
-PROFILE_NAME = 'dev'
-REGION_NAME = 'eu-west-1'
+
+def _session():
+    _session = Config(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+    return _session.create_client()
 
 class SsmCollect(object):
 
@@ -25,9 +29,7 @@ class SsmCollect(object):
         :type param_name: object
         """
         try:
-            session = boto3.session.Session(profile_name=PROFILE_NAME,
-                                            region_name=REGION_NAME)
-            ssm_client = session.client('ssm')
+            ssm_client = _session()
             parameter = ssm_client.get_parameter(
                 Name=param_name, WithDecryption=True)
             return {
@@ -49,9 +51,7 @@ class SsmCollect(object):
         put parameter value belongs to parameter_name
         :type res_type: object
         """
-        session = boto3.session.Session(profile_name=PROFILE_NAME,
-                                        region_name=REGION_NAME)
-        ssm_client = session.client('ssm')
+        ssm_client = _session()
         paginator = ssm_client.get_paginator('describe_parameters')
         params = []
         param_name = []
